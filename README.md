@@ -1,66 +1,69 @@
-# ??? CozinhaAPI - Backend
+# CozinhaAPI - Backend
 
-API RESTful desenvolvida em .NET 8 para gerenciar pratos e reservas de uma cozinha. A aplicação oferece endpoints para criar, ler, atualizar e deletar pratos e reservas, com suporte a CORS para integração com front-end em Angular.
+API RESTful desenvolvida em .NET 8 para gerenciar pratos e reservas de uma cozinha corporativa. A aplicaÃ§Ã£o fornece endpoints para criaÃ§Ã£o, leitura, atualizaÃ§Ã£o e exclusÃ£o (CRUD) de pratos e reservas, com suporte a CORS para integraÃ§Ã£o com front-end (ex.: Angular).
 
-## ?? Características
+## CaracterÃ­sticas
 
-- ? **CRUD Completo** para Pratos e Reservas
-- ? **Entity Framework Core** com SQL Server
-- ? **Swagger/OpenAPI** para documentação interativa
-- ? **CORS** configurado para Angular (localhost:4200)
-- ? **Async/Await** para operações de banco de dados
-- ? **Fluent API** para configuração do Entity Framework
-- ? **.NET 8** com C# 12
+* CRUD completo para Pratos e Reservas
+* Entity Framework Core com SQL Server
+* Swagger / OpenAPI para documentaÃ§Ã£o interativa
+* CORS configurado para front-end (localhost:4200)
+* Async/Await para operaÃ§Ãµes de banco de dados
+* Fluent API para configuraÃ§Ã£o do Entity Framework
+* .NET 8 com C# 12
 
-## ??? Arquitetura
+## Arquitetura
 
 ```
 CozinhaApi/
-??? Models/
-?   ??? Prato.cs              # Modelo de Pratos
-?   ??? Reserva.cs            # Modelo de Reservas
-??? Controllers/
-?   ??? PratosController.cs    # Endpoints de Pratos
-?   ??? ReservasController.cs  # Endpoints de Reservas
-??? Data/
-?   ??? Context.cs            # DbContext principal
-?   ??? DataConfiguration/
-?       ??? PratosConfiguration.cs
-?       ??? ReservasConfiguration.cs
-??? Program.cs                 # Configuração da aplicação
-??? appsettings.json          # Configurações
-??? CozinhaApi.csproj        # Arquivo do projeto
+â”œâ”€â”€ Models/
+â”‚   â”œâ”€â”€ Prato.cs                 # Modelo de Pratos
+â”‚   â””â”€â”€ Reserva.cs               # Modelo de Reservas
+â”œâ”€â”€ Controllers/
+â”‚   â”œâ”€â”€ PratosController.cs      # Endpoints de Pratos
+â”‚   â””â”€â”€ ReservasController.cs    # Endpoints de Reservas
+â”œâ”€â”€ Data/
+â”‚   â”œâ”€â”€ Context.cs               # DbContext principal
+â”‚   â””â”€â”€ DataConfiguration/
+â”‚       â”œâ”€â”€ PratosConfiguration.cs
+â”‚       â””â”€â”€ ReservasConfiguration.cs
+â”œâ”€â”€ Program.cs                   # ConfiguraÃ§Ã£o da aplicaÃ§Ã£o
+â”œâ”€â”€ appsettings.json             # ConfiguraÃ§Ãµes
+â””â”€â”€ CozinhaApi.csproj             # Arquivo do projeto
 ```
 
-## ?? Dependências
+## DependÃªncias
 
-- **Microsoft.EntityFrameworkCore** (9.0.12)
-- **Microsoft.EntityFrameworkCore.SqlServer** (9.0.12)
-- **Swashbuckle.AspNetCore** (6.6.2)
-- **System.Text.Json** (10.0.2)
+* Microsoft.EntityFrameworkCore (9.0.12)
+* Microsoft.EntityFrameworkCore.SqlServer (9.0.12)
+* Swashbuckle.AspNetCore (6.6.2)
+* System.Text.Json (10.0.2)
 
-## ?? Como Começar
+## Como ComeÃ§ar
 
-### Pré-requisitos
+### PrÃ©-requisitos
 
-- .NET 8 SDK
-- SQL Server ou SQL Server LocalDB
-- Visual Studio 2022 (recomendado) ou VS Code
+* .NET 8 SDK
+* SQL Server ou SQL Server LocalDB
+* Visual Studio 2022 (recomendado) ou VS Code
 
-### Instalação
+### InstalaÃ§Ã£o
 
-1. **Clone o repositório:**
+1. Clone o repositÃ³rio:
+
 ```bash
 git clone https://github.com/DouglasProvk/CozinhaApi.git
 cd CozinhaApi
 ```
 
-2. **Restaure as dependências:**
+2. Restaure as dependÃªncias:
+
 ```bash
 dotnet restore
 ```
 
-3. **Configure a string de conexão** em `appsettings.json`:
+3. Configure a string de conexÃ£o em `appsettings.json`:
+
 ```json
 {
   "ConnectionStrings": {
@@ -69,56 +72,60 @@ dotnet restore
 }
 ```
 
-4. **Execute as migrations do banco de dados:**
+4. Execute as migrations do banco de dados:
+
 ```bash
 dotnet ef database update
 ```
 
-5. **Inicie a aplicação:**
+5. Inicie a aplicaÃ§Ã£o:
+
 ```bash
 dotnet run
 ```
 
-A API estará disponível em: `https://localhost:7000` (ou a porta configurada)
+A API estarÃ¡ disponÃ­vel em `https://localhost:7000` (ou a porta configurada).
 
-## ?? Endpoints da API
+## Endpoints da API
 
-### ?? Pratos
+### Pratos
 
-| Método | Endpoint | Descrição |
-|--------|----------|-----------|
-| `GET` | `/api/pratos` | Lista todos os pratos |
-| `GET` | `/api/pratos/{id}` | Obtém um prato pelo ID |
-| `POST` | `/api/pratos` | Cria um novo prato |
-| `PUT` | `/api/pratos/{id}` | Atualiza um prato |
-| `DELETE` | `/api/pratos/{id}` | Deleta um prato |
+| MÃ©todo | Endpoint         | DescriÃ§Ã£o              |
+| ------ | ---------------- | ---------------------- |
+| GET    | /api/pratos      | Lista todos os pratos  |
+| GET    | /api/pratos/{id} | ObtÃ©m um prato pelo ID |
+| POST   | /api/pratos      | Cria um novo prato     |
+| PUT    | /api/pratos/{id} | Atualiza um prato      |
+| DELETE | /api/pratos/{id} | Remove um prato        |
 
-#### Exemplo de Requisição POST - Prato:
+Exemplo de requisiÃ§Ã£o POST:
+
 ```json
 {
-  "nome": "Frango à Parmesana",
+  "nome": "Frango Ã  Parmesana",
   "descricao": "Frango empanado com molho de tomate e queijo",
   "categoria": "frango",
   "disponivel": true
 }
 ```
 
-### ?? Reservas
+### Reservas
 
-| Método | Endpoint | Descrição |
-|--------|----------|-----------|
-| `GET` | `/api/reservas` | Lista todas as reservas (ordenadas por data) |
-| `GET` | `/api/reservas/{id}` | Obtém uma reserva pelo ID |
-| `POST` | `/api/reservas` | Cria uma nova reserva |
-| `PUT` | `/api/reservas/{id}` | Atualiza uma reserva |
-| `DELETE` | `/api/reservas/{id}` | Deleta uma reserva |
+| MÃ©todo | Endpoint           | DescriÃ§Ã£o                                    |
+| ------ | ------------------ | -------------------------------------------- |
+| GET    | /api/reservas      | Lista todas as reservas (ordenadas por data) |
+| GET    | /api/reservas/{id} | ObtÃ©m uma reserva pelo ID                    |
+| POST   | /api/reservas      | Cria uma nova reserva                        |
+| PUT    | /api/reservas/{id} | Atualiza uma reserva                         |
+| DELETE | /api/reservas/{id} | Remove uma reserva                           |
 
-#### Exemplo de Requisição POST - Reserva:
+Exemplo de requisiÃ§Ã£o POST:
+
 ```json
 {
-  "nomePessoa": "João Silva",
+  "nomePessoa": "JoÃ£o Silva",
   "pratoId": 1,
-  "pratoNome": "Frango à Parmesana",
+  "pratoNome": "Frango Ã  Parmesana",
   "dataRefeicao": "2024-02-15T12:00:00Z",
   "periodo": "almoco",
   "observacoes": "Sem cebola",
@@ -126,22 +133,24 @@ A API estará disponível em: `https://localhost:7000` (ou a porta configurada)
 }
 ```
 
-## ?? Modelos
+## Modelos
 
 ### Prato
+
 ```csharp
 public class Prato
 {
     public int Id { get; set; }
     public string Nome { get; set; }
     public string? Descricao { get; set; }
-    public string Categoria { get; set; } // carne, frango, peixe, vegetariano, vegano
+    public string Categoria { get; set; }
     public bool Disponivel { get; set; } = true;
     public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
 }
 ```
 
 ### Reserva
+
 ```csharp
 public class Reserva
 {
@@ -150,88 +159,91 @@ public class Reserva
     public int PratoId { get; set; }
     public string? PratoNome { get; set; }
     public DateTime DataRefeicao { get; set; }
-    public string Periodo { get; set; } // almoco, jantar
+    public string Periodo { get; set; }
     public string? Observacoes { get; set; }
-    public string Status { get; set; } = "confirmada"; // confirmada, cancelada, servida
+    public string Status { get; set; } = "confirmada";
     public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
-    
+
     public virtual Prato? Prato { get; set; }
 }
 ```
 
-## ?? Configuração
+## ConfiguraÃ§Ã£o
 
 ### CORS
-A aplicação está configurada para aceitar requisições do front-end Angular em `http://localhost:4200`.
 
-Se precisar alterar a origem, modifique em `Program.cs`:
+Configurado para aceitar requisiÃ§Ãµes do front-end em `http://localhost:4200`.
+
 ```csharp
 options.AddPolicy("AllowAngular", policy =>
 {
-    policy.WithOrigins("sua-origem-aqui")
+    policy.WithOrigins("http://localhost:4200")
           .AllowAnyHeader()
           .AllowAnyMethod();
 });
 ```
 
 ### Swagger
-Acesse a documentação interativa em: `https://localhost:7000/swagger`
 
-## ?? Estrutura do Banco de Dados
+DocumentaÃ§Ã£o disponÃ­vel em:
+`https://localhost:7000/swagger`
 
-### Tabela: Pratos
-- `Id` (PK)
-- `Nome` (VARCHAR(150), NOT NULL)
-- `Descricao` (VARCHAR(500), NULL)
-- `Categoria` (VARCHAR(50), NOT NULL)
-- `Disponivel` (BIT, DEFAULT 1)
-- `CreatedDate` (DATETIME, DEFAULT GETUTCDATE())
+## Estrutura do Banco de Dados
 
-### Tabela: Reservas
-- `Id` (PK)
-- `NomePessoa` (VARCHAR(150), NOT NULL)
-- `PratoId` (INT, FK ? Pratos, NOT NULL)
-- `PratoNome` (VARCHAR(150), NULL)
-- `DataRefeicao` (DATETIME, NOT NULL)
-- `Periodo` (VARCHAR(20), NOT NULL)
-- `Observacoes` (VARCHAR(500), NULL)
-- `Status` (VARCHAR(20), DEFAULT 'confirmada')
-- `CreatedDate` (DATETIME, DEFAULT GETUTCDATE())
+### Tabela Pratos
 
-## ?? Desenvolvimento
+* Id (PK)
+* Nome (VARCHAR(150), NOT NULL)
+* Descricao (VARCHAR(500), NULL)
+* Categoria (VARCHAR(50), NOT NULL)
+* Disponivel (BIT, DEFAULT 1)
+* CreatedDate (DATETIME, DEFAULT GETUTCDATE())
 
-### Executar testes:
+### Tabela Reservas
+
+* Id (PK)
+* NomePessoa (VARCHAR(150), NOT NULL)
+* PratoId (INT, FK para Pratos)
+* PratoNome (VARCHAR(150), NULL)
+* DataRefeicao (DATETIME, NOT NULL)
+* Periodo (VARCHAR(20), NOT NULL)
+* Observacoes (VARCHAR(500), NULL)
+* Status (VARCHAR(20), DEFAULT 'confirmada')
+* CreatedDate (DATETIME, DEFAULT GETUTCDATE())
+
+## Desenvolvimento
+
+Executar testes:
+
 ```bash
 dotnet test
 ```
 
-### Build de release:
+Build de release:
+
 ```bash
 dotnet build -c Release
 ```
 
-## ?? Contribuindo
+## Contribuindo
 
-Contribuições são bem-vindas! Sinta-se à vontade para:
 1. Fork o projeto
-2. Criar uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abrir um Pull Request
+2. Crie uma branch para sua feature
+3. Commit suas mudanÃ§as
+4. Push para a branch
+5. Abra um Pull Request
 
-## ?? Licença
+## LicenÃ§a
 
-Este projeto é de código aberto e disponível sob a [MIT License](LICENSE).
+Este projeto Ã© distribuÃ­do sob a licenÃ§a MIT.
 
-## ????? Autor
+## Autor
 
-**Douglas Provk**
-- GitHub: [@DouglasProvk](https://github.com/DouglasProvk)
+Douglas Provk
+GitHub: [https://github.com/DouglasProvk](https://github.com/DouglasProvk)
 
-## ?? Suporte
+## Suporte
 
-Para reportar problemas ou sugerir melhorias, abra uma [Issue](https://github.com/DouglasProvk/CozinhaApi/issues).
+Para reportar problemas ou sugerir melhorias, utilize as Issues do repositÃ³rio.
 
----
-
-**Última atualização:** Fevereiro de 2026
+Ãšltima atualizaÃ§Ã£o: Fevereiro de 2026
