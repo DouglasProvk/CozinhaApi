@@ -14,6 +14,9 @@ namespace CozinhaAPI.Data.DataConfiguration
                 .IsRequired()
                 .HasMaxLength(150);
 
+            builder.Property(r => r.CPFFuncionario)
+                .HasMaxLength(14);
+
             builder.Property(r => r.PratoId)
                 .IsRequired();
 
@@ -42,6 +45,9 @@ namespace CozinhaAPI.Data.DataConfiguration
                 .WithMany()
                 .HasForeignKey(r => r.PratoId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            // Índice para buscar reservas por data e CPF do funcionário
+            builder.HasIndex(r => new { r.DataRefeicao, r.CPFFuncionario });
 
             builder.ToTable("Reservas");
         }

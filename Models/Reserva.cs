@@ -4,9 +4,10 @@
     {
         public int Id { get; set; }
         public string NomePessoa { get; set; }
+        public string? CPFFuncionario { get; set; } // CPF do funcionário que fez a reserva (para D-1)
         public int PratoId { get; set; }
         public string? PratoNome { get; set; }
-        public DateTime DataRefeicao { get; set; }
+        public DateTime DataRefeicao { get; set; } // Data da refeição (sempre D+1 da criação)
         public string Periodo { get; set; } // almoco, jantar
         public string? Observacoes { get; set; }
         public string Status { get; set; } = "confirmada"; // confirmada, cancelada, servida

@@ -1,9 +1,10 @@
 ﻿using CozinhaApi.Models;
+using CozinhaApi.DTOs.Prato;
 using CozinhaAPI.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace CozinhaAPI.Controllers
+namespace CozinhaApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -34,22 +35,52 @@ namespace CozinhaAPI.Controllers
             return prato;
         }
 
-        // POST: api/Pratos
+        // POST: api/Pratos (Apenas Admin)
         [HttpPost]
-        public async Task<ActionResult<Prato>> PostPrato(Prato prato)
+        public async Task<ActionResult<Prato>> PostPrato([FromBody] CreatePratoRequest request)
         {
+            // Validar se o CPF fornecido pertence a um admin
+            var funcionario = await _context.Funcionarios
+                .FirstOrDefaultAsync(f => f.CPF == request.CPFAdmin && f.IsAdmin);
+
+            if (funcionario == null)
+                return Unauthorized(new { message = "Apenas administradores podem criar pratos" });
+
+            var prato = new Prato
+            {
+                Nome = request.Nome,
+                Descricao = request.Descricao,
+                Categoria = request.Categoria,
+                Disponivel = request.Disponivel,
+                EhPrincipal = request.EhPrincipal
+            };
+
             _context.Pratos.Add(prato);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetPrato), new { id = prato.Id }, prato);
         }
 
-        // PUT: api/Pratos/5
+        // PUT: api/Pratos/5 (Apenas Admin)
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPrato(int id, Prato prato)
+        public async Task<IActionResult> PutPrato(int id, [FromBody] UpdatePratoRequest request)
         {
-            if (id != prato.Id)
-                return BadRequest();
+            // Validar se o CPF fornecido pertence a um admin
+            var funcionario = await _context.Funcionarios
+                .FirstOrDefaultAsync(f => f.CPF == request.CPFAdmin && f.IsAdmin);
+
+            if (funcionario == null)
+                return Unauthorized(new { message = "Apenas administradores podem editar pratos" });
+
+            var prato = await _context.Pratos.FindAsync(id);
+            if (prato == null)
+                return NotFound();
+
+            prato.Nome = request.Nome;
+            prato.Descricao = request.Descricao;
+            prato.Categoria = request.Categoria;
+            prato.Disponivel = request.Disponivel;
+            prato.EhPrincipal = request.EhPrincipal;
 
             _context.Entry(prato).State = EntityState.Modified;
 
@@ -67,10 +98,17 @@ namespace CozinhaAPI.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Pratos/5
+        // DELETE: api/Pratos/5 (Apenas Admin)
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePrato(int id)
+        public async Task<IActionResult> DeletePrato(int id, [FromQuery] string cpfAdmin)
         {
+            // Validar se o CPF fornecido pertence a um admin
+            var funcionario = await _context.Funcionarios
+                .FirstOrDefaultAsync(f => f.CPF == cpfAdmin && f.IsAdmin);
+
+            if (funcionario == null)
+                return Unauthorized(new { message = "Apenas administradores podem deletar pratos" });
+
             var prato = await _context.Pratos.FindAsync(id);
             if (prato == null)
                 return NotFound();

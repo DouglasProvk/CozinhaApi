@@ -10,6 +10,7 @@ namespace CozinhaAPI.Data
 
         public DbSet<Prato> Pratos { get; set; } // injeção de dependência para acessar a tabela Pratos
         public DbSet<Reserva> Reservas { get; set; } // injeção de dependência para acessar a tabela Reservas
+        public DbSet<Funcionario> Funcionarios { get; set; } // injeção de dependência para acessar a tabela Funcionarios
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -17,6 +18,7 @@ namespace CozinhaAPI.Data
 
             modelBuilder.ApplyConfiguration(new PratosConfiguration());
             modelBuilder.ApplyConfiguration(new ReservasConfiguration());
+            modelBuilder.ApplyConfiguration(new FuncionariosConfiguration());
         }
     }
 }
